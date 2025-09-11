@@ -23,6 +23,7 @@
                 <textarea name="Expectation" placeholder="What are your expectations" required></textarea>
             <button type="submit"><img src="images/send-icon.png" width="30px"></button>
         </form>
+        <button onclick="toggleMsg()" style="margin-top: 20px;">Toggle Message</button>
     </div>
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxRb2b8RpHnqoGtvDkN5IJii0vs0w77I2jshaGXs6rl0ZT6eflTNw3JrXEiiFO94oMhiw/exec'
@@ -33,14 +34,23 @@
         e.preventDefault()
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => {
-            msg.innerHTML = "Thank You For Subscribing!"
+            msg.innerHTML = "Thank You For Registering!"
+             msg.style.display = "block";
             form.reset()
             setTimeout(() => {
                 msg.innerHTML = ""
+                msg.style.display = "none";
             }, 5000);
         })
         .catch(error => console.error('Error!', error.message))
         })
+        function toggleMsg(){
+            if(msg.style.display === "none" || msg.style.display === ""){
+                msg.style.display = "block";
+            } else {
+                msg.style.display = "none"
+            }
+        }
     </script>
 </body>
 </html>
