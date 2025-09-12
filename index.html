@@ -9,21 +9,20 @@
 <body>
     <div class="hero">
         <img src="images/logo.png.jpg" alt="Logo" class="logo" />
-        <br>
-        <br>
         <h3>COMMUNICATIONS DEPARTMENT <br> SEVENTH DAY ADVENTIST CHURCH, FESTAC TOWN, LAGOS</h3>
         <h1>SECURITY FOR THE FUTURE IN A DIGITAL WORLD 2.0</h1>
         <p>Register for attendance.</p>
         <span id="msg"></span> <br>
-        <form name="submit-to-google-sheet" class="form-container">
-                <input type="text" name="FirstName" placeholder="First Name" required>
-                <input type="text" name="LastName" placeholder="Last Name" required>
-                <input type="tel" name="PhoneNumber" placeholder="Phone Number" required>
-                <input type="email" name="Email" placeholder="Your Email Address" required>
-                <textarea name="Expectation" placeholder="What are your expectations" required></textarea>
-            <button type="submit"><img src="images/send-icon.png" width="30px"></button>
-        </form>
-        <button onclick="toggleMsg()" style="margin-top: 20px;">Toggle Message</button>
+        <div id="myDIV" style="display:block; width:100%">
+            <form name="submit-to-google-sheet" class="form-container">
+                    <input type="text" name="FirstName" placeholder="First Name" required>
+                    <input type="text" name="LastName" placeholder="Last Name" required>
+                    <input type="tel" name="PhoneNumber" placeholder="Phone Number" required>
+                    <input type="email" name="Email" placeholder="Your Email Address" required>
+                    <textarea name="Expectation" placeholder="What are your expectations" required></textarea>
+                <button type="submit"><img src="images/send-icon.png" width="30px"></button>
+            </form>
+        </div>
     </div>
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxRb2b8RpHnqoGtvDkN5IJii0vs0w77I2jshaGXs6rl0ZT6eflTNw3JrXEiiFO94oMhiw/exec'
@@ -32,6 +31,7 @@
 
         form.addEventListener('submit', e => {
         e.preventDefault()
+        hideshow();
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => {
             msg.innerHTML = "Thank You For Registering!"
@@ -44,11 +44,12 @@
         })
         .catch(error => console.error('Error!', error.message))
         })
-        function toggleMsg(){
-            if(msg.style.display === "none" || msg.style.display === ""){
-                msg.style.display = "block";
+        function hideshow(){
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
             } else {
-                msg.style.display = "none"
+                x.style.display = "none";
             }
         }
     </script>
